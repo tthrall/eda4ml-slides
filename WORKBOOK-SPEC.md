@@ -1,0 +1,246 @@
+# Student Workbook Specification
+
+## 1. Purpose
+
+This specification defines how content in chapter slide decks (`*-slides.qmd`) is identified for extraction into student workbooks. The design principle is to leverage existing structural conventions wherever possible, minimizing the need for new markup.
+
+The workbook serves two scenarios:
+
+- **Self-study:** A record of the student's engagement with the material, for future reference
+- **Instructor-led:** Confirmation of exercise completion; space for recording class discussion
+
+---
+
+## 2. Content Categories
+
+| Category | Workbook Treatment |
+|----------|-------------------|
+| **Learning objectives** | Listed at start of workbook; derived from Key Takeaways |
+| **Key concepts** | Extracted with space for student notes |
+| **Formulas** | Extracted as reference; student fills in variable definitions |
+| **Exercises** | Extracted with response space appropriate to type |
+| **Figures** | Included as reference where pedagogically essential |
+| **Scaffolding** | Excluded (transitions, lecture flow, historical context) |
+| **Instructor notes** | Excluded |
+
+---
+
+## 3. Slide-Title Patterns
+
+The workbook generator identifies content by matching slide titles against these patterns. Matching is case-insensitive.
+
+### 3.1 Learning Objectives & Key Concepts
+
+**Patterns:**
+
+- `## Learning Objectives` (preferred, under development)
+- `## Key Takeaways` (current fallback)
+- `## Key Concepts`
+- `## Core Principles*` (wildcard suffix)
+- `## Summary` (only when followed by concept content, not a section header)
+
+**Note:** Learning objectives will eventually appear as a dedicated slide within the Instructor Appendix (`::: {.notes}` or `# Appendix:`). Until then, derive from Key Takeaways.
+
+**Extraction:** Each bullet or numbered item becomes a workbook entry with:
+
+- The concept statement
+- Blank lines for student elaboration
+
+### 3.2 Formulas
+
+**Patterns:**
+
+- `## Key Formulas`
+- `## Formulas`
+
+**Extraction:** Each displayed equation (`$$...$$`) is extracted with:
+
+- The formula
+- A prompt: "Define each term:"
+- Blank lines for student response
+
+**Note:** Inline formulas within concept slides are not separately extracted.
+
+### 3.3 Exercises
+
+**Patterns:**
+
+- `## Team Exercise N:*` → Type: team, default open-response
+- `## Individual Exercise N:*` → Type: individual, default open-response
+- `## Class Exercise*` → Type: class, default open-response
+- `## Discussion Questions` → Type: class, open-response
+
+**Response type inference:**
+
+If the exercise text contains any of the following, mark as `closed`:
+
+- "Calculate...", "Compute...", "Find...", "Fill in...", "How many...", "What is the value..."
+
+Otherwise, mark as `open`.
+
+**Override:** Append `[closed]` or `[open]` to slide title to force response type:
+
+```markdown
+## Team Exercise 4: Normal Distribution [closed]
+```
+
+**Extraction:**
+
+- Open-response: Exercise prompt + 10–15 blank lines
+- Closed-response: Exercise prompt + structured answer space (shorter)
+
+### 3.4 Excluded Content
+
+**Patterns:**
+
+- `::: {.notes}` blocks → Instructor-only
+- `## Chapter Roadmap` → Scaffolding
+- `## Looking Ahead` → Scaffolding
+- `## Resources` / `## References` → Excluded (provide separately if needed)
+- `# Appendix:*` and all slides within → Instructor-only
+- Slides with `{visibility="uncounted"}` → Instructor-only
+
+### 3.5 Conditionally Included
+
+**Callout boxes** (`::: {.callout-*}`):
+
+| Callout type | Default | Rationale |
+|--------------|---------|-----------|
+| `.callout-note` with "ML Connection" | Include | Bridges to application |
+| `.callout-tip` | Include | Practical guidance |
+| `.callout-warning` | Include | Common errors |
+| `.callout-note` (other) | Include | Supplementary concepts |
+
+Callouts are extracted as indented blocks within the Key Concepts section.
+
+**Figures:**
+
+Figures are included only if:
+
+- Referenced in an exercise, OR
+- The slide title contains "Visualization" or "Diagram", OR
+- Marked with comment `<!-- workbook: include-figure -->`
+
+---
+
+## 4. Explicit Tagging (Edge Cases Only)
+
+When slide-title patterns are insufficient, use HTML comments immediately after the slide title:
+
+```markdown
+## Some Slide Title
+<!-- workbook: concept -->
+```
+
+**Valid tags:**
+
+- `<!-- workbook: concept -->` — Extract as key concept
+- `<!-- workbook: formula -->` — Extract formulas from this slide
+- `<!-- workbook: exclude -->` — Skip this slide entirely
+- `<!-- workbook: include-figure -->` — Include figure in workbook
+- `<!-- workbook: exercise-closed -->` — Override response type
+- `<!-- workbook: exercise-open -->` — Override response type
+
+These tags are needed rarely. If you find yourself using them frequently, consider whether a new title pattern should be added to section 3.
+
+---
+
+## 5. Workbook Output Structure
+
+For each chapter, the generated workbook contains:
+
+### 5.1 Header
+
+- Title and Chapter Number
+- Version stamp (slide-deck commit hash + generation date)
+- Note: "Some exercises may reference figures or content in the slides. Download the slide deck from [URL] as needed."
+
+### 5.2 Learning Objectives
+
+- Derived from Key Takeaways (or explicit Learning Objectives slide when available)
+
+### 5.3 Key Concepts
+
+- Concept statement
+- [blank lines for notes]
+- Relevant callouts (indented)
+
+### 5.4 Formulas (if any)
+
+- Formula
+- "Define each term:"
+- [blank lines]
+
+### 5.5 Exercises
+
+- Numbered sequentially within workbook (1, 2, 3...)
+- Exercise type noted in parentheses: (Team), (Individual), (Class Discussion)
+- Exercise prompt
+- [response space appropriate to type]
+
+### 5.6 Reflection (if Discussion Questions exist)
+
+- Discussion question prompts
+- Extended response space
+
+---
+
+## 6. Function Signature (Preliminary)
+
+```r
+#' Generate a student workbook from chapter slides
+#'
+#' @param chapter Integer chapter number
+#' @param format Output format: "pdf", "docx", or "qmd"
+#' @param include_figures Logical; include referenced figures (default FALSE)
+#' @param solutions Logical; include solution space markers (default TRUE)
+#'
+#' @return Path to generated workbook file
+#'
+#' @examples
+#' create_workbook(chapter = 5, format = "pdf")
+
+create_workbook <- function(
+    chapter,
+    format = c("pdf", "docx", "qmd"),
+    include_figures = FALSE,
+    solutions = TRUE
+) {
+
+
+
+}
+```
+
+---
+
+## 7. Design Decisions
+
+| Question | Resolution |
+|----------|------------|
+| Learning objectives source | Derive from Key Takeaways; migrate to explicit `## Learning Objectives` in Instructor Appendix over time |
+| Exercise numbering | Sequential within workbook (1, 2, 3...) with type annotation |
+| Cross-references to slides | Global header note; student downloads slides as needed |
+| Versioning | Include slide-deck commit hash + generation date in header |
+
+---
+
+## 8. Standardization Checklist
+
+Before implementing the workbook generator, ensure slide decks conform to these conventions:
+
+- [ ] Each chapter has a `## Key Takeaways` or `## Key Concepts` slide
+- [ ] Formulas intended for workbook extraction appear under `## Key Formulas`
+- [ ] Exercise slides follow naming convention: `## Team Exercise N: Title`
+- [ ] Discussion questions appear under `## Discussion Questions`
+- [ ] Instructor-only content is in `::: {.notes}` or `# Appendix:` sections
+- [ ] No duplicate slides (e.g., repeated Discussion Questions)
+
+---
+
+## 9. Future Extensions
+
+- **Instructor workbook variant:** Include solutions, timing notes, discussion prompts
+- **Interactive format:** Generate as Quarto document with executable code cells
+- **Assessment integration:** Tag exercises with difficulty level, estimated time
+- **Taxonomy mapping:** Link learning objectives to external frameworks (CF-DS, ACM CCDSC)
