@@ -1,0 +1,65 @@
+---
+title: "EDA for Machine Learning: Slides"
+---
+
+Lecture slides for [*Exploratory Data Analysis for Machine Learning*](https://tthrall.github.io/eda4ml/).
+
+## Part 1: Foundations of EDA
+
+| Chapter | Slides |
+|---------|--------|
+| 1. Exploratory Data Analysis | [eda-slides.html](eda-slides.html) |
+| 2. Conditional Distributions | [conditioning-slides.html](conditioning-slides.html) |
+| 3. Clustering | [clustering-slides.html](clustering-slides.html) |
+| 4. Statistical Simulation | [simulation-slides.html](simulation-slides.html) |
+| 5. Sampling and Study Design | [study-design-slides.html](study-design-slides.html) |
+| 6. Information Theory | [info-theory-slides.html](info-theory-slides.html) |
+
+## Part 2: Linear Algebra Methods
+
+| Chapter | Slides |
+|---------|--------|
+| 7. Linear Regression | [lin-reg-slides.html](lin-reg-slides.html) |
+| 8. Principal Component Analysis | [pca-slides.html](pca-slides.html) |
+| 9. Linear Discriminant Analysis | [lin-discr-slides.html](lin-discr-slides.html) |
+
+## Part 3: Text Data
+
+| Chapter | Slides |
+|---------|--------|
+| 10. Text as Data | [text-as-data-slides.html](text-as-data-slides.html) |
+| 11. Topic Models | [topic-models-slides.html](topic-models-slides.html) |
+
+## Part 4: Time Series Data
+
+| Chapter | Slides |
+|---------|--------|
+| 12. Time Series Data | [ts-data-slides.html](ts-data-slides.html) |
+| 13. Time Domain Methods | [ts-time-domain-slides.html](ts-time-domain-slides.html) |
+| 14. Frequency Domain Methods | [ts-freq-domain-slides.html](ts-freq-domain-slides.html) |
+
+## Part 5: Graph Data
+
+| Chapter | Slides |
+|---------|--------|
+| 15. Graph Theory for Machine Learning | [graph-theory-slides.html](graph-theory-slides.html) |
+
+---
+
+## Usage
+
+These slides are designed as visual overviews for lecture or self-study orientation. We recommend using them as the first step in the **slides → workbooks → book** learning sequence.
+
+- **Slides**: Survey the terrain ("What am I about to learn?")
+- **Workbooks**: Attempt exercises ("Can I do this?")
+- **Book**: Read for understanding ("Why does this work?")
+
+## Related Resources
+
+- [Book](https://tthrall.github.io/eda4ml/) (published online)
+- [Data + Workbooks](https://github.com/tthrall/eda4mlr) (`eda4mlr` R package)
+- [Source repository](https://github.com/tthrall/eda4ml-slides)
+
+## How to Cite
+
+> Thrall, T. (2025). *Exploratory Data Analysis for Machine Learning*. <https://tthrall.github.io/eda4ml/>

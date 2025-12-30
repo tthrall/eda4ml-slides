@@ -1,0 +1,17 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "EDA for Machine Learning: Slides"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Book"
+        href: https://tthrall.github.io/eda4ml/
+
+format:
+  html:
+    theme: cosmo
+    toc: false
