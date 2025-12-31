@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: ab67a9a0-15db-4958-b795-3278858af99f
+      url: https://tthrall.quarto.pub/eda-for-machine-learning-slides
