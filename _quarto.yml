@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - "*.qmd"
+    - "!z_warehouse/"
 
 website:
   title: "EDA for Machine Learning: Slides"

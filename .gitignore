@@ -15,3 +15,5 @@ _site/
 
 # Warehouse
 /z_warehouse/
+
+/.quarto/
