@@ -4,7 +4,7 @@ Lecture slides for [*Exploratory Data Analysis for Machine Learning*](https://tt
 
 ## View Slides Online
 
-**Published at: <https://tthrall.github.io/eda4ml-slides/>**
+**Published at: <https://tthrall.quarto.pub/eda-for-machine-learning-slides/>**
 
 No installation required. Click any slide deck to view in your browser.
 
@@ -59,11 +59,10 @@ To render slides locally:
 quarto render
 ```
 
-To publish updates to GitHub Pages:
+To publish updates to Quarto Pub:
 
 ```bash
-quarto render
-quarto publish gh-pages --no-render
+quarto publish quarto-pub
 ```
 
 ## How to Cite
