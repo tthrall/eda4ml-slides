@@ -1,119 +1,71 @@
-# eda4ml-slides
+# EDA for Machine Learning: Slides
 
-Slide decks for *Exploratory Data Analysis for Machine Learning*, a textbook for Masters-level data science students.
+Lecture slides for [*Exploratory Data Analysis for Machine Learning*](https://tthrall.github.io/eda4ml/).
 
-## Overview
+## View Slides Online
 
-These [Quarto Reveal.js](https://quarto.org/docs/presentations/revealjs/) presentations accompany the online textbook. Each slide deck distills a chapter's key concepts into lecture-ready format, with speaker notes, discussion prompts, and exercises suitable for classroom use.
+**Published at: <https://tthrall.github.io/eda4ml-slides/>**
 
-## Slide Decks
+No installation required. Click any slide deck to view in your browser.
 
-| File | Chapter | Title |
-|------|---------|-------|
-| `eda-slides.qmd` | 1 | Exploratory Data Analysis |
-| `conditioning-slides.qmd` | 2 | Conditional Distributions |
-| `clustering-slides.qmd` | 3 | Clustering |
-| `simulation-slides.qmd` | 4 | Statistical Simulation |
-| `study-design-slides.qmd` | 5 | Sampling and Study Design |
-| `info-theory-slides.qmd` | 6 | Information Theory |
-| `lin-reg-slides.qmd` | 7 | Linear Regression |
-| `pca-slides.qmd` | 8 | Principal Component Analysis |
-| `lin-discr-slides.qmd` | 9 | Linear Discriminant Analysis |
-| `text-as-data-slides.qmd` | 10 | Text as Data |
-| `topic-models-slides.qmd` | 11 | Topic Models |
-| `ts-data-slides.qmd` | 12 | Time Series Data |
-| `ts-time-domain-slides.qmd` | 13 | Time Domain Methods |
-| `ts-freq-domain-slides.qmd` | 14 | Frequency Domain Methods |
-| `graph-theory-slides.qmd` | 15 | Graph Theory for Machine Learning |
+## Slides by Chapter
 
-## Usage
+### Part 1: Foundations of EDA
+- Chapter 1: Exploratory Data Analysis
+- Chapter 2: Conditional Distributions
+- Chapter 3: Clustering
+- Chapter 4: Statistical Simulation
+- Chapter 5: Sampling and Study Design
+- Chapter 6: Information Theory
 
-### Rendering slides
+### Part 2: Linear Algebra Methods
+- Chapter 7: Linear Regression
+- Chapter 8: Principal Component Analysis
+- Chapter 9: Linear Discriminant Analysis
 
-To render a single slide deck:
+### Part 3: Text Data
+- Chapter 10: Text as Data
+- Chapter 11: Topic Models
 
-```bash
-quarto render eda-slides.qmd
-```
+### Part 4: Time Series Data
+- Chapter 12: Time Series Data
+- Chapter 13: Time Domain Methods
+- Chapter 14: Frequency Domain Methods
 
-To render all slide decks:
+### Part 5: Graph Data
+- Chapter 15: Graph Theory for Machine Learning
+
+## Recommended Learning Sequence
+
+We recommend **slides → workbooks → book** rather than reading-first:
+
+1. **Slides**: Survey the terrain ("What am I about to learn?")
+2. **Workbooks**: Attempt exercises ("Can I do this?")
+3. **Book**: Read for understanding ("Why does this work?")
+
+## Related Resources
+
+| Resource | Location |
+|----------|----------|
+| **Book** | <https://tthrall.github.io/eda4ml/> |
+| **Data + Workbooks** | `remotes::install_github("tthrall/eda4mlr")` |
+| **Instructor Materials** | Private (request access) |
+
+## For Developers
+
+To render slides locally:
 
 ```bash
 quarto render
 ```
 
-### Viewing slides
+To publish updates to GitHub Pages:
 
-Open the rendered `.html` file in a browser. Press `S` to open speaker notes in a separate window.
-
-### Keyboard shortcuts (Reveal.js)
-
-| Key | Action |
-|-----|--------|
-| `→` / `←` | Next / previous slide |
-| `S` | Speaker notes |
-| `O` | Slide overview |
-| `F` | Fullscreen |
-| `?` | Help |
-
-## Dependencies
-
-### R packages
-
-The slide decks use the following packages:
-
-```r
-# Core
-install.packages(c("tidyverse", "knitr"))
-
-# Data
-remotes::install_github("tthrall/eda4mldata")
-
-# Chapter-specific (install as needed)
-install.packages(c(
- "GGally",      # conditioning, clustering
- "palmerpenguins", # clustering, lin-discr
- "HistData",    # lin-reg (Galton)
-  "tidytext",    # text-as-data, topic-models
-  "igraph",      # graph-theory
-  "astsa"        # ts-data, ts-time-domain, ts-freq-domain
-))
+```bash
+quarto render
+quarto publish gh-pages --no-render
 ```
 
-### Stylesheet
+## How to Cite
 
-All slide decks use a shared theme defined in `eda4ml-slides.scss`. This file must be present in the same directory as the `.qmd` files (or adjust the theme path in each file's YAML header).
-
-## Customization
-
-### Timing
-
-Most slide decks include an instructor timing guide in the appendix. A typical 50-minute lecture covers roughly 25–30 slides with discussion.
-
-### Speaker notes
-
-Speaker notes appear in `:::  {.notes}` blocks. These are visible only in presenter view (press `S`).
-
-### Exercises
-
-Exercises at the end of each deck align with the corresponding textbook chapter. They are categorized as:
-
-- **Conceptual** — Understanding core ideas
-- **Calculations** — Working through examples by hand
-- **Programming** — R implementation
-- **Advanced** — Deeper exploration (optional)
-
-## Related Resources
-
-- **Textbook**: [eda4ml](https://github.com/tthrall/eda4ml) — Full book source
-- **Data package**: [eda4mldata](https://github.com/tthrall/eda4mldata) — Datasets used in examples
-- **Student workbook**: *(coming soon)* — Guided exercises for each chapter
-
-## License
-
-These materials are intended for educational use in conjunction with the textbook.
-
-## Author
-
-Tony Thrall  
-tthrall@alumni.stanford.edu
+> Thrall, T. (2025). *Exploratory Data Analysis for Machine Learning*. <https://tthrall.github.io/eda4ml/>
