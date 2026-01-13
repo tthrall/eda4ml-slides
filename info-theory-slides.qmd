@@ -474,6 +474,50 @@ $$\text{Information Gain} = H(\text{parent}) - \sum_{\text{children}} \frac{n_{\
 
 . . .
 
+## Information Gain: Worked Example {.smaller}
+
+A telecom company wants to predict customer churn. How much information can be gained by splitting on contract-type?
+
+| Contract Type | Churned: Yes | Churned: No | Total |
+|---------------|:------------:|:-----------:|:-----:|
+| Month-to-month| 150          | 90          | 240   |
+| One-year      | 30           | 130         | 160   |
+| Two-year      | 10           | 90          | 100   |
+| **Total**     | **190**      | **310**     | **500** |
+
+. . .
+
+**Step 1: Parent entropy**
+
+$$H(\text{churn}) = -\frac{190}{500}\log_2\frac{190}{500} - \frac{310}{500}\log_2\frac{310}{500} \approx 0.96 \text{ bits}$$
+
+## Information Gain: Worked Example (continued) {.smaller}
+
+**Step 2: Weighted child entropy**
+
+| Subset         | $H(\text{churn})$ | Weight |
+|----------------|:-----------------:|:------:|
+| Month-to-month | 0.95 bits         | 240/500 |
+| One-year       | 0.70 bits         | 160/500 |
+| Two-year       | 0.47 bits         | 100/500 |
+
+$$H(\text{churn} | \text{contract}) = \frac{240}{500}(0.95) + \frac{160}{500}(0.70) + \frac{100}{500}(0.47) \approx 0.78 \text{ bits}$$
+
+. . .
+
+**Step 3: Information gain**
+
+$$IG = 0.96 - 0.78 = 0.18 \text{ bits}$$
+
+. . .
+
+Knowing contract type reduces churn uncertainty by 0.18 bits (about 19%).
+
+::: {.notes}
+Students can verify these calculations using `eda4mlr::entropy()` and `eda4mlr::information_gain()`. The worked example makes the formula concrete before they encounter it in team exercises.
+:::
+
+
 ## Feature Selection with Mutual Information
 
 **Correlation** captures linear relationships.
@@ -582,6 +626,26 @@ Compare cross-entropy loss for these predictions:
 
 ::: {.notes}
 Exercise 1 builds intuition for entropy. Exercise 2 connects to conditioning chapter. Exercise 3 motivates cross-entropy in neural networks.
+:::
+
+## Team Exercise 4: Dice Data
+
+Consider the following results from 144 rolls of a pair of dice.
+
+| Result    |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 |
+|-----------|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Frequency | 26 | 14 | 11 | 13 | 12 | 15 | 11 | 14 | 12 | 13 | 13 |
+
+. . .
+
+1. What distribution would you expect from rolling a pair of dice?
+2. Do these results match your expectations?
+3. Compute the entropy of the observed distribution.
+4. Compute the KL divergence from your expected distribution to the observed.
+5. What might explain any discrepancy?
+
+::: {.notes}
+Exercise 4 challenges students to notice that the data doesn't match the expected triangular distribution of 2d6. The nearly-uniform distribution (with a spike at 2) suggests a different generating process. See instructor materials for solution.
 :::
 
 ## Discussion Questions

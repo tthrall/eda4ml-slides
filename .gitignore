@@ -17,3 +17,5 @@ _site/
 /z_warehouse/
 
 /.quarto/
+
+**/*.quarto_ipynb
